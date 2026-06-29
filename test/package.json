@@ -1,0 +1,13 @@
+{
+  "name": "quickbeak-test",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Dev-only headless smoke-test for QuickBeak.html (not shipped to users).",
+  "scripts": {
+    "test": "node smoke.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.61.1"
+  }
+}

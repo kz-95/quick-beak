@@ -1,0 +1,39 @@
+# Private planning docs - local only, not for git
+LocalDocs/
+
+# Retired/superseded docs - non-canonical, never ships
+archive/
+
+# Sync backups
+.sync-backup_*/
+
+# Secrets / env
+.env
+.env.*
+*.key
+
+# Dev tooling deps (smoke-test); the test source is tracked, its deps are not
+node_modules/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+png-to-ico.py
+batch-png-scaler.bat
+
+# OMC runtime state (not the shared skills in .omc/skills/)
+.omc/state/
+.omc/sessions/
+.omc/project-memory.json
+.omc/artifacts/
+
+# Agent / AI config files (local only, never ship)
+CLAUDE.md
+AGENTS.md
+.kilo/
+.claude/
+
