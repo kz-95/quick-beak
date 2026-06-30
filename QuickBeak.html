@@ -379,7 +379,7 @@
         }
         .search input {
           padding: 11px 0;
-          font-size: 14px;
+          font-size: 16px; /* >=16px stops iOS Safari auto-zooming on focus */
         }
         .ctrl-btn,
         .sortdir {
@@ -1447,7 +1447,7 @@
       .xfer-in {
         width: 120px;
         min-width: 0;
-        font-size: 13px;
+        font-size: 16px; /* >=16px avoids iOS Safari zoom-on-focus */
         padding: 8px 10px;
         border: 1px solid var(--line);
         border-radius: 9px;
@@ -1534,7 +1534,19 @@
         line-height: 1.4;
       }
       .lock-in {
+        width: 100%;
+        font-size: 16px; /* >=16px avoids iOS Safari zoom-on-focus */
+        font-family: var(--sans);
+        color: var(--ink);
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 11px;
+        padding: 12px;
+        outline: none;
         margin-bottom: 10px;
+      }
+      .lock-in:focus {
+        border-color: var(--accent);
       }
       .lock-err {
         color: var(--danger, #e5484d);

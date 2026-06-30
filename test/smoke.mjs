@@ -401,6 +401,21 @@ check(
       .contains(document.querySelector("#filters")),
   ),
 );
+check(
+  "ui(mobile): every form control >=16px font (no iOS zoom-on-focus)",
+  await page.evaluate(() => {
+    const bad = [];
+    document.querySelectorAll("input, select, textarea").forEach((el) => {
+      // only fields that summon the keyboard can trigger iOS zoom
+      if (["checkbox", "radio", "file"].includes(el.type)) return;
+      if (el.readOnly || el.disabled) return;
+      if (parseFloat(getComputedStyle(el).fontSize) < 16)
+        bad.push((el.id || el.className || el.tagName) + ":" + getComputedStyle(el).fontSize);
+    });
+    window.__badFs = bad;
+    return bad.length === 0;
+  }),
+);
 await page.setViewportSize({ width: 1280, height: 720 });
 await page.waitForTimeout(50);
 

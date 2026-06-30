@@ -87,6 +87,10 @@ they ship in a tagged release.
   single line; vertical spacing between header sections normalised to 10px.
 
 ### Fixed
+- **No more mobile zoom-on-tap.** Inputs that were under 16px (board search, the
+  paste-settings boxes, and the encryption-unlock fields) made iOS Safari zoom in
+  on focus and not zoom back. All form fields are now >=16px. (The lock-screen
+  inputs were also previously unstyled - now styled to match.)
 - **Load/save no longer loops alerts in restrictive webviews.** All localStorage
   access goes through guards that never throw, so a sandboxed/private-mode viewer
   (reads or writes blocked) degrades to an in-memory session with a single clear
