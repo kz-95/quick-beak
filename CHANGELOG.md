@@ -20,8 +20,42 @@ Entry format (from VERSIONING.md) — group by `Added` / `Changed` / `Fixed` /
 
 ## [Unreleased]
 
-Work toward `1.0.0` (Free). Track granular tasks in `TODO.md`; move them here as
-they ship in a tagged release.
+_Nothing yet - the next release will appear here. Track granular tasks in `TODO.md`._
+
+## [1.0.1] - 2026-06-30
+
+Free patch: model picker, design-system pass, and logged fixes. No new data
+migration - `FORMAT_VERSION` stays `2` and existing data loads unchanged.
+
+### Added
+- (Free) **OpenRouter provider preset** - one key reaches many models.
+- (Free) **Auto-fetch models on provider select** - pulls the live model list
+  when a key is saved or the endpoint is localhost; silent on failure (keeps the
+  seeded fallback) and overwrites the model box only on success. The manual fetch
+  button stays, with its loud errors.
+- (Free) **Reset a provider to default** - restores a seeded provider's base URL
+  and models; the saved key is kept.
+- (Free) **Apply button on Paste Settings** - a dependable way to confirm a
+  pasted settings string on phones, where paste/Enter events are unreliable.
+
+### Changed
+- (Free) **Design system applied.** Bright priority heat ramp (critical reads
+  hotter than high); on desktop the calm app column floats as a rounded window
+  centered on a branded backdrop, while mobile stays a full-width column. FAB
+  drop-shadow re-tinted to the green accent.
+- (Free) **Offline-first fonts.** Removed the Google Fonts CDN link/preconnects
+  and tightened the CSP; the brand families fall back to the system stack with no
+  network call.
+- (Free) Trimmed the seeded model fallback lists to verified-real names; the live
+  fetch remains the source of truth.
+
+### Fixed
+- (Free) Copy-settings toast no longer claims the key/secret are included when
+  encryption is locked (they are blank then) - it now says to unlock first.
+
+## [1.0.0] - 2026-06-29
+
+First public release (Free). Git tag `v1.0.0`; app `APP_VERSION = "1.0.0"`.
 
 ### Added
 - (Free) **Projects.** Create / select / rename / archive / delete projects, each
