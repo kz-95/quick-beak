@@ -324,6 +324,12 @@
       #filterOverlay select {
         width: 100%;
       }
+      #tabData .btn {
+        width: 100%; /* fill the field, text centred */
+      }
+      #confirmOverlay {
+        z-index: 120; /* the guard sits above every other overlay (incl. Settings) */
+      }
       /* desktop row 1 = search:sort:reverse 8:1:1; row 2 = category:type 5:5 */
       #filters {
         flex: 0 0 100%;
@@ -2096,6 +2102,19 @@
           <div class="d-actions">
             <button class="btn ghost" data-close="proj">Close</button>
             <button class="btn primary" id="projCreate">Create project</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay" id="confirmOverlay">
+      <div class="dialog">
+        <div class="d-head"><span class="ttl" id="confirmTitle">Confirm</span></div>
+        <div class="d-body">
+          <p class="note" id="confirmMsg" style="display: block"></p>
+          <div class="d-actions">
+            <button class="btn ghost" id="confirmCancel">Cancel</button>
+            <button class="btn primary" id="confirmOk">Confirm</button>
           </div>
         </div>
       </div>
@@ -5008,43 +5027,62 @@
         function populateDataTab() {
           /* nothing dynamic yet */
         }
+        /* In-app confirmation guard (replaces native confirm()/alert() for destructive actions). */
+        let _guardCb = null;
+        function guardConfirm(title, msg, okLabel, onYes) {
+          $("confirmTitle").textContent = title;
+          $("confirmMsg").textContent = msg;
+          $("confirmOk").textContent = okLabel || "Confirm";
+          _guardCb = onYes;
+          $("confirmOverlay").classList.add("open");
+        }
+        function closeGuard() {
+          $("confirmOverlay").classList.remove("open");
+          _guardCb = null;
+        }
+        if ($("confirmOk"))
+          $("confirmOk").addEventListener("click", () => {
+            const cb = _guardCb;
+            closeGuard();
+            if (cb) cb();
+          });
+        if ($("confirmCancel"))
+          $("confirmCancel").addEventListener("click", closeGuard);
         if ($("forgetKeys"))
           $("forgetKeys").addEventListener("click", () => {
             if (encOn && encLocked) {
-              alert(
-                "Unlock encryption first (API Settings), then forget keys.",
-              );
+              toast("Unlock encryption first (API Settings), then forget keys.");
               return;
             }
-            if (
-              !confirm(
-                "Forget all API keys and the sync shared secret on this device? Your bugs and projects stay.",
-              )
-            )
-              return;
-            db.settings.providers.forEach((p) => {
-              p.key = "";
-            });
-            if (db.settings.sync) db.settings.sync.token = "";
-            saveDB();
-            if (encOn && encKey) persistSecrets();
-            if (typeof populateSyncTab === "function") populateSyncTab();
-            const sk = $("sKey");
-            if (sk) sk.value = "";
-            toast("API keys and sync secret cleared");
+            guardConfirm(
+              "Forget API keys?",
+              "Forget all API keys and the sync shared secret on this device? Your bugs and projects stay.",
+              "Forget keys",
+              () => {
+                db.settings.providers.forEach((p) => {
+                  p.key = "";
+                });
+                if (db.settings.sync) db.settings.sync.token = "";
+                saveDB();
+                if (encOn && encKey) persistSecrets();
+                if (typeof populateSyncTab === "function") populateSyncTab();
+                const sk = $("sKey");
+                if (sk) sk.value = "";
+                toast("API keys and sync secret cleared");
+              },
+            );
           });
         if ($("clearData"))
           $("clearData").addEventListener("click", () => {
-            if (
-              !confirm(
-                "Clear ALL local data (bugs, projects, settings, keys) and reload? Export a backup first. This cannot be undone.",
-              )
-            )
-              return;
-            if (!confirm("Really erase everything on this device? Last chance."))
-              return;
-            wipeLocalData();
-            location.reload();
+            guardConfirm(
+              "Clear ALL local data?",
+              "Erases every bug, project, screenshot, setting and saved key in this browser, then reloads. Export a backup first - this cannot be undone.",
+              "Erase everything",
+              () => {
+                wipeLocalData();
+                location.reload();
+              },
+            );
           });
 
         /* Backdrop dismiss that ignores drags: close only when the press AND release both land on the backdrop `pad`.

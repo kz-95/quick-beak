@@ -970,6 +970,39 @@ check(
     )),
 );
 
+/* ---- 11. Data tab: full-width buttons + in-app confirm guard (no native confirm) ---- */
+await page.click("#gearBtn");
+await page.waitForTimeout(120);
+await page.click("#tabBtnData");
+await page.waitForTimeout(80);
+check(
+  "data: forget/clear buttons fill the field width",
+  await page.evaluate(() => {
+    const tab = document.querySelector("#tabData");
+    const f = document.querySelector("#forgetKeys");
+    return Math.abs(f.getBoundingClientRect().width - tab.clientWidth) <= 2;
+  }),
+);
+await page.click("#clearData");
+await page.waitForTimeout(80);
+check(
+  "data: Clear opens the in-app guard dialog (not native confirm)",
+  await page.evaluate(() =>
+    document.querySelector("#confirmOverlay").classList.contains("open"),
+  ),
+);
+await page.click("#confirmCancel");
+await page.waitForTimeout(60);
+check(
+  "data: guard Cancel closes it and data is untouched",
+  await page.evaluate(
+    (k) =>
+      !document.querySelector("#confirmOverlay").classList.contains("open") &&
+      !!localStorage.getItem(k),
+    STORAGE_KEY,
+  ),
+);
+
 await browser.close();
 if (pageErrors.length) console.error("page errors:\n" + pageErrors.join("\n"));
 console.log(failures ? "\nSMOKE FAILED (" + failures + ")" : "\nSMOKE OK");
