@@ -23,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Outfit:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -84,14 +84,14 @@
         margin-bottom: 10px;
       }
       .brand {
-        font-family: "Comfortaa", var(--serif);
+        font-family: "Literata", var(--serif);
         font-weight: 700;
         font-size: 32px;
         letter-spacing: -0.5px;
         line-height: 1;
         display: flex;
         align-items: center;
-        gap: 0;
+        gap: 8px;
       }
       .brand-logo {
         width: 36px;
@@ -100,7 +100,7 @@
         display: block;
       }
       .brand > span {
-        margin-left: -2px; /* tuck the wordmark against the logo (the logo is the "Q") */
+        margin-left: 0;
       }
       .brand .bug {
         color: var(--accent);
@@ -1631,7 +1631,7 @@
               alt=""
               src="data:image/png;base64,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"
             />
-            <span><span class="bug">uick</span>Beak</span>
+            <span><span class="bug">Quick</span>Beak</span>
           </div>
         </div>
         <div class="head-btns">
@@ -2489,6 +2489,19 @@
             <div class="d-actions" style="margin-top: 2px">
               <button
                 class="btn ghost"
+                id="resetProvider"
+                style="
+                  flex: none;
+                  width: auto;
+                  padding: 0 12px;
+                  font-size: 13px;
+                  display: none;
+                "
+              >
+                Reset to default
+              </button>
+              <button
+                class="btn ghost"
                 id="resetProviders"
                 style="
                   flex: none;
@@ -3188,12 +3201,7 @@
               kind: "openai",
               baseUrl: "https://api.deepseek.com/v1",
               key: "",
-              models: [
-                "deepseek-v4-flash",
-                "deepseek-v4-pro",
-                "deepseek-chat",
-                "deepseek-reasoner",
-              ],
+              models: ["deepseek-v4-flash", "deepseek-v4-pro"],
             },
             {
               id: "openai",
@@ -3207,8 +3215,21 @@
                 "gpt-5.4-mini",
                 "gpt-5.4-nano",
                 "gpt-5.3-codex",
-                "gpt-5.1",
-                "gpt-5",
+              ],
+            },
+            {
+              /* OpenRouter: one key reaches hundreds of models across providers.
+                 Seed models are a pre-fetch fallback only - the live fetch is
+                 the source of truth and overwrites these on a successful fetch. */
+              id: "openrouter",
+              name: "OpenRouter",
+              kind: "openai",
+              baseUrl: "https://openrouter.ai/api/v1",
+              key: "",
+              models: [
+                "openai/gpt-5.5",
+                "anthropic/claude-sonnet-4.6",
+                "deepseek/deepseek-v4-pro",
               ],
             },
             {
@@ -3217,13 +3238,7 @@
               kind: "openai",
               baseUrl: "https://api.moonshot.ai/v1",
               key: "",
-              models: [
-                "kimi-k2.6",
-                "kimi-k2.5",
-                "moonshot-v1-128k",
-                "moonshot-v1-32k",
-                "moonshot-v1-8k",
-              ],
+              models: ["kimi-k2.6", "kimi-k2.5", "moonshot-v1-128k"],
             },
             {
               id: "qwen",
@@ -3237,7 +3252,6 @@
                 "qwen-flash",
                 "qwen-turbo",
                 "qwen3-coder-plus",
-                "qwen3.5-plus",
               ],
             },
             {
@@ -3246,13 +3260,7 @@
               kind: "openai",
               baseUrl: "https://open.bigmodel.cn/api/paas/v4",
               key: "",
-              models: [
-                "glm-4.7",
-                "glm-5",
-                "glm-4.6",
-                "glm-4.5-air",
-                "glm-4.7-flash",
-              ],
+              models: ["glm-4.7", "glm-5", "glm-4.6", "glm-4.7-flash"],
             },
             {
               id: "gemini",
@@ -3264,8 +3272,6 @@
                 "gemini-3.5-flash",
                 "gemini-3.1-flash-lite",
                 "gemini-3.1-pro",
-                "gemini-2.5-flash",
-                "gemini-2.5-flash-lite",
               ],
             },
             {
@@ -3305,6 +3311,10 @@
         }
 
         /* ---------- state / storage ---------- */
+        /* App release version (semver). Must match the Git tag of the shipped
+           release (e.g. v1.0.0). The updater compares this to GitHub
+           /releases/latest. Bump it with every release. */
+        const APP_VERSION = "1.0.0";
         const STORAGE_KEY = "quickbeak:db";
         const SEC_KEY = "quickbeak:sec";
         /* legacy keys from the Co-Bug Dump era — read once, migrated to the new keys */
@@ -5645,6 +5655,7 @@
             $("sKey").value = "";
             $("sKey").placeholder = "paste API key";
             $("delProvider").style.display = "none";
+            $("resetProvider").style.display = "none";
             return;
           }
           const p = db.settings.providers.find((x) => x.id === id);
@@ -5659,6 +5670,13 @@
             ? "key saved — paste to replace"
             : "paste API key";
           $("delProvider").style.display = "";
+          /* "Reset to default" only makes sense for a seeded provider (a custom
+             provider has no seed to restore). Match by id against the seed set. */
+          $("resetProvider").style.display = seedProviders().some(
+            (s) => s.id === p.id,
+          )
+            ? ""
+            : "none";
         }
         function openSettings(tab) {
           const firstId = db.settings.providers.find(
@@ -5685,11 +5703,20 @@
           $("sKey").value = "";
         }
         $("gearBtn").addEventListener("click", () => openSettings("api"));
-        $("sProvider").addEventListener("change", () =>
-          loadProviderIntoForm($("sProvider").value),
-        );
+        $("sProvider").addEventListener("change", () => {
+          const id = $("sProvider").value;
+          loadProviderIntoForm(id);
+          /* Auto-fetch the live model list when the provider can actually be
+             reached (a key is saved, or it is a localhost endpoint like Ollama).
+             Silent: a failure keeps the seeded fallback with no error nag, and
+             the model box is overwritten only on a successful fetch. */
+          if (id === "__add__") return;
+          const p = db.settings.providers.find((x) => x.id === id);
+          if (!p) return;
+          if ((p.key && p.key.trim()) || isLocalHost(p.baseUrl)) fetchModels(true);
+        });
 
-        async function fetchModels() {
+        async function fetchModels(silent) {
           const baseUrl = $("sBaseUrl").value.trim();
           const kind = $("sKind").value === "gemini" ? "gemini" : "openai";
           let key = $("sKey").value;
@@ -5702,7 +5729,7 @@
           try {
             validateBaseUrl(baseUrl);
           } catch (err) {
-            setSetNote(err.message);
+            if (!silent) setSetNote(err.message);
             return;
           }
           const base = baseUrl.replace(/\/+$/, "");
@@ -5762,13 +5789,14 @@
             }
             ids = Array.from(new Set(ids)).sort().slice(0, 120);
             if (ids.length === 0) {
-              setSetNote("Provider returned no usable models.");
+              if (!silent) setSetNote("Provider returned no usable models.");
               return;
             }
             $("sModels").value = ids.join(", ");
-            setSetNote(
-              "Fetched " + ids.length + " models — review, then Save provider.",
-            );
+            if (!silent)
+              setSetNote(
+                "Fetched " + ids.length + " models — review, then Save provider.",
+              );
           } catch (err) {
             let msg;
             if (err instanceof TypeError)
@@ -5779,12 +5807,12 @@
                 "Couldn't fetch models (" +
                 (err && err.message ? err.message : "error") +
                 ").";
-            setSetNote(msg);
+            if (!silent) setSetNote(msg);
           } finally {
             btn.textContent = old;
           }
         }
-        $("fetchModels").addEventListener("click", fetchModels);
+        $("fetchModels").addEventListener("click", () => fetchModels());
 
         $("setSave").addEventListener("click", () => {
           const name = clampStr($("sName").value.trim() || "Provider", 40);
@@ -5872,6 +5900,23 @@
           refreshProviderSelect(db.settings.active.pid);
           loadProviderIntoForm(db.settings.active.pid);
           setSetNote("Reset to defaults.");
+        });
+        $("resetProvider").addEventListener("click", () => {
+          if (!editingProviderId) return;
+          const seed = seedProviders().find((s) => s.id === editingProviderId);
+          if (!seed) return;
+          const p = db.settings.providers.find(
+            (x) => x.id === editingProviderId,
+          );
+          if (!p) return;
+          /* Restore the seeded baseUrl + models only; the saved key is kept. */
+          p.baseUrl = seed.baseUrl;
+          p.models = seed.models.slice();
+          ensureActiveValid();
+          saveDB();
+          refreshProviderSelect(editingProviderId);
+          loadProviderIntoForm(editingProviderId);
+          setSetNote("Reset to default (key kept).");
         });
         function setSetNote(msg) {
           toast(msg);
