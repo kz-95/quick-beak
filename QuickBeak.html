@@ -2332,6 +2332,25 @@
               autocomplete="off"
               placeholder="Paste Settings"
             />
+            <button
+              id="pasteAllGo"
+              type="button"
+              aria-label="Apply pasted settings"
+              style="
+                flex: none;
+                border: 1px solid var(--line);
+                background: var(--accent-soft);
+                color: var(--accent);
+                border-radius: 8px;
+                padding: 7px 11px;
+                font: inherit;
+                font-size: 13px;
+                font-weight: 600;
+                cursor: pointer;
+              "
+            >
+              Apply
+            </button>
           </div>
           <button class="icon-btn" data-close="set" aria-label="Close">
             <svg
@@ -2387,6 +2406,25 @@
               autocomplete="off"
               placeholder="Paste Settings"
             />
+            <button
+              id="pasteSyncGo"
+              type="button"
+              aria-label="Apply pasted sync settings"
+              style="
+                flex: none;
+                border: 1px solid var(--line);
+                background: var(--accent-soft);
+                color: var(--accent);
+                border-radius: 8px;
+                padding: 7px 11px;
+                font: inherit;
+                font-size: 13px;
+                font-weight: 600;
+                cursor: pointer;
+              "
+            >
+              Apply
+            </button>
           </div>
           <div class="xfer-div"></div>
           <div class="xfer-grp">
@@ -2419,6 +2457,25 @@
               autocomplete="off"
               placeholder="Paste Settings"
             />
+            <button
+              id="pasteApiGo"
+              type="button"
+              aria-label="Apply pasted API settings"
+              style="
+                flex: none;
+                border: 1px solid var(--line);
+                background: var(--accent-soft);
+                color: var(--accent);
+                border-radius: 8px;
+                padding: 7px 11px;
+                font: inherit;
+                font-size: 13px;
+                font-weight: 600;
+                cursor: pointer;
+              "
+            >
+              Apply
+            </button>
           </div>
         </div>
         <div class="d-body">
@@ -7210,9 +7267,17 @@
               b.classList.add("copied");
               setTimeout(() => b.classList.remove("copied"), 900);
             }
+            /* Be honest about what was actually copied: when encryption is on
+               but locked, the key/secret are encrypted and not in memory, so the
+               payload carries blank values. Only claim they are included when
+               encryption is off or unlocked. */
+            const secretsIncluded = !(encOn && encLocked);
             toast(
               scopeLabel(scope) +
-                " copied — paste into the other browser/device. Note: includes your key/secret.",
+                " copied — paste into the other browser/device. " +
+                (secretsIncluded
+                  ? "Note: includes your key/secret."
+                  : "Keys are locked, so they were not included — unlock first to copy them."),
             );
           };
           const fb = () => {
@@ -7333,7 +7398,7 @@
             scope: typeof obj.scope === "string" ? obj.scope : fallbackScope,
           };
         }
-        function wirePaste(scope, inputId) {
+        function wirePaste(scope, inputId, btnId) {
           const inp = $(inputId);
           /* C4: no silent auto-apply. Validate the marker, then require an explicit confirmation that names what changes. */
           const run = () => {
@@ -7369,6 +7434,10 @@
           inp.addEventListener("paste", () => {
             setTimeout(run, 30);
           });
+          /* Phones don't reliably fire the paste/Enter events (and some mobile
+             keyboards have no return key), so an explicit Apply button is the
+             dependable way to confirm a pasted settings string. */
+          if (btnId && $(btnId)) $(btnId).addEventListener("click", run);
         }
         $("copyAll").addEventListener("click", () =>
           gateSecretCopy(() => copySettings("all", "copyAll")),
@@ -7379,9 +7448,9 @@
         $("copySync").addEventListener("click", () =>
           gateSecretCopy(() => copySettings("sync", "copySync")),
         );
-        wirePaste("all", "pasteAll");
-        wirePaste("api", "pasteApi");
-        wirePaste("sync", "pasteSync");
+        wirePaste("all", "pasteAll", "pasteAllGo");
+        wirePaste("api", "pasteApi", "pasteApiGo");
+        wirePaste("sync", "pasteSync", "pasteSyncGo");
         $("xferToggle").addEventListener("click", () => {
           const bar = $("xferBar");
           const open = bar.style.display === "none";
