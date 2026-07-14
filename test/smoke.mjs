@@ -77,6 +77,24 @@ check("boot: #list present", (await page.$("#list")) !== null);
 check("boot: a card rendered", (await page.$("#list .card")) !== null);
 check("boot: no uncaught errors", pageErrors.length === 0);
 check(
+  "splash: intro shows on a fresh install",
+  await page.evaluate(() =>
+    document.getElementById("splash").classList.contains("open"),
+  ),
+);
+await page.click("#splashSkip");
+await page.waitForTimeout(80);
+check(
+  "splash: dismissed and recorded as seen",
+  await page.evaluate(() => {
+    const gone = !document
+      .getElementById("splash")
+      .classList.contains("open");
+    const d = JSON.parse(localStorage.getItem("quickbeak:db") || "{}");
+    return gone && !!d.settings && d.settings.splashSeen === true;
+  }),
+);
+check(
   "boot: Magic Tidy spinner keyframe 'sp' is defined (rotation works)",
   await page.evaluate(() =>
     [...document.styleSheets].some((ss) => {
@@ -219,8 +237,8 @@ check(
   !liveTitles.some((t) => t.includes("Trashed item")),
 );
 check(
-  "model: critical priority pill rendered",
-  (await page.$("#list .pill.pri-critical")) !== null,
+  "model: critical priority indicator rendered (side bar)",
+  (await page.$("#list .card.p-critical .pri-bar")) !== null,
 );
 check("model: no uncaught errors on migrated render", pageErrors.length === 0);
 
@@ -303,6 +321,9 @@ check(
   titles.some((t) => t.includes("Alpha bug one")) &&
     titles.some((t) => t.includes("Beta bug only")),
 );
+// Import/Export now lives in a popover behind the io icon; open it first so the
+// format <select> is interactable.
+await page.evaluate(() => document.getElementById("ioMenu").classList.add("open"));
 // Copy follows the export-format dropdown: Table copies TSV (covering every project)
 await page.selectOption("#exportFmt", "table");
 check(
@@ -342,21 +363,25 @@ check(
   }),
 );
 await page.selectOption("#exportFmt", "md");
+// close the io popover so it stops intercepting later clicks
+await page.evaluate(() => document.getElementById("ioMenu").classList.remove("open"));
 
 await page.selectOption("#projSel", "projaaa");
-// desktop: filters inline (no button), status filter removed entirely
+// filters open via the Filter & sort popover at all widths (no inline filters); status filter removed
 check(
   "ui: status filter removed (#fStatus gone)",
   (await page.$("#fStatus")) === null,
 );
 check(
-  "ui: filters inline on desktop, filter button hidden",
+  "ui: filters in popover (inline hidden), filter button shown on desktop",
   await page.evaluate(() => {
     const t = document.querySelector("#fType");
     const btn = document.querySelector("#filterBtn");
-    return !!t && t.offsetParent !== null && (!btn || btn.offsetParent === null);
+    return !!t && t.offsetParent === null && !!btn && btn.offsetParent !== null;
   }),
 );
+await page.click("#filterBtn");
+await page.waitForTimeout(80);
 await page.selectOption("#fType", "suggestion");
 await page.waitForTimeout(100);
 titles = await cardTitles();
@@ -366,6 +391,7 @@ check(
     !titles.some((t) => t.includes("Alpha bug one")),
 );
 await page.selectOption("#fType", "");
+await page.click('#filterOverlay [data-close="filter"]');
 await page.waitForTimeout(50);
 
 // mobile: filter button shows, opens dialog (selects move in), then move back on close
@@ -484,7 +510,7 @@ check(
     );
   }),
 );
-await page.click("#edCancel");
+await page.click("#edClose");
 await page.waitForTimeout(50);
 
 check("ui: no uncaught errors during controls flow", pageErrors.length === 0);
@@ -556,7 +582,7 @@ check(
     return !!tp && tp.style.display !== "none" && /\[Backend\]/.test(tp.textContent || "");
   }),
 );
-await page.click("#edCancel");
+await page.click("#edClose");
 await page.waitForTimeout(50);
 
 await page.click("#gearBtn");
@@ -621,9 +647,21 @@ check(
 );
 await page.click("#projManageBtn");
 await page.waitForTimeout(120);
+// the name + preset chips render in the edit view, so open the project row to paint them
+await page.click("#projList .proj-row");
+await page.waitForTimeout(120);
 check(
   "sec: projects overlay (name + preset chips) did not execute payload",
   !(await page.evaluate(() => window.__xss || 0)),
+);
+check(
+  "ui: projects edit view opens with the name + preset chips painted",
+  await page.evaluate(
+    () =>
+      document.querySelector("#projViewEdit").style.display !== "none" &&
+      !!document.querySelector("#projEditName") &&
+      !!document.querySelector("#presetChips"),
+  ),
 );
 check(
   "sec: no live onerror <img> anywhere in the document",

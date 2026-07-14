@@ -1,6 +1,11 @@
 # Private planning docs - local only, not for git
 LocalDocs/
 
+# Imported design-kit standalones - private reference, CDN-dependent, ~2.4MB each.
+# The real app is QuickBeak.html; these are only the visual target to match.
+QuickBeak App (standalone).html
+QuickBeak Desktop (standalone).html
+
 # Retired/superseded docs - non-canonical, never ships
 archive/
 
@@ -22,6 +27,7 @@ Thumbs.db
 .idea/
 .vscode/
 
+#tools
 png-to-ico.py
 batch-png-scaler.bat
 
@@ -37,3 +43,6 @@ AGENTS.md
 .kilo/
 .claude/
 
+#Not useful for github
+test/
+FutureUpdate/

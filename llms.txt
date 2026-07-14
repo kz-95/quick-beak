@@ -1,0 +1,31 @@
+# QuickBeak
+
+> QuickBeak is a single-file, offline-first, privacy-first issue tracker for indie
+> developers and makers. Drop bugs, suggestions, and feedback as you build. A local
+> AI cleans up your notes (text never leaves your machine), and everything syncs
+> through a Google Sheet you own. No server, no subscription - one-time $1 for Pro.
+
+QuickBeak is one HTML file you open in any browser. Your data lives in your own
+browser and, optionally, a Google Sheet in your own Google account - never on our
+servers. Bring your own AI provider (Ollama, OpenAI-compatible, Gemini, Odysseus,
+OpenRouter, or any local model) so note cleanup stays private. Free to use,
+including commercially; you may not resell, embed, or redistribute it.
+
+## Install
+- [Windows (PowerShell)](https://quickbeak.com/install.ps1): `irm https://quickbeak.com/install.ps1 | iex`
+- [macOS / Linux](https://quickbeak.com/install.sh): `curl -fsSL https://quickbeak.com/install.sh | sh`
+- [Open the app directly](https://quickbeak.com/QuickBeak.html)
+
+## Key facts
+- Single HTML file, runs offline, no install bloat (delete the file to uninstall).
+- Privacy-first: no server, no tracking, no telemetry; data stays in your browser / your own Google account.
+- Local-AI "Magic Tidy" cleans rough notes into a tidy bug/suggestion/feedback entry.
+- Sync via a Google Sheet you own (Apps Script); no account with us.
+- Pricing: Free now; Pro is a one-time $1 (never a subscription); Team is $1 per seat.
+- Platforms: any modern browser (PWA on phones), Windows/macOS/Linux desktop builds for Pro.
+
+## Links
+- [Home](https://quickbeak.com)
+- [Source on GitHub](https://github.com/kz-95/quick-beak)
+- [License (source-available, no-redistribution)](https://github.com/kz-95/quick-beak/blob/main/LICENSE.md)
+- [Support](mailto:support@quickbeak.com)

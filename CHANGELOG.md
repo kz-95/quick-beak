@@ -37,21 +37,50 @@ migration - `FORMAT_VERSION` stays `2` and existing data loads unchanged.
   and models; the saved key is kept.
 - (Free) **Apply button on Paste Settings** - a dependable way to confirm a
   pasted settings string on phones, where paste/Enter events are unreliable.
+- (Free) **Per-type Magic Tidy.** Bug, Suggestion and Feedback each get their own
+  tidier role and their own "what to infer" rule, and the item's type is sent as
+  trusted context. A suggestion is no longer rewritten as a defect, and feedback
+  keeps its sentiment. The prompt-injection guard is unchanged - all context stays
+  ahead of `NOTE FOLLOWS:`, so the untrusted note is still end-anchored.
+- (Free) **First-run intro (Splash).** Logo, wordmark and tagline on launch,
+  shown once and then never again; dismiss by tapping or Skip.
+- (Free) **Default category pool.** New projects arrive with a ready-made pool -
+  `Other · UI · UX / Flow · Data · Performance · Auth · Integration · Platform` -
+  so switching a project to preset mode is useful immediately. `Other` sits first
+  deliberately: when the AI picks a category outside the pool, the clamp falls back
+  to the first entry, so the catch-all absorbs it instead of a real category taking
+  the blame. Category mode still defaults to AI-decides. Projects created before
+  1.0.1 keep their empty pool (nothing is silently re-added) and get a **"Load the
+  defaults"** link in the Projects edit view instead.
 
 ### Changed
-- (Free) **Design system applied.** Bright priority heat ramp (critical reads
-  hotter than high); on desktop the calm app column floats as a rounded window
-  centered on a branded backdrop, while mobile stays a full-width column. FAB
-  drop-shadow re-tinted to the green accent.
+- (Free) **Design system applied - full pass.** Board, cards, top bar, search row
+  and the item editor now match the design kit rather than merely borrowing its
+  colours. Cards carry a status-textured priority bar, a status circle you can
+  click to cycle, and a status glow. The top bar folds import/export behind an
+  icon and shows stats as pill chips; the search row is a single line with filter
+  and sort behind icons. The item editor moves type + project into its header. On
+  desktop the calm app column floats as a rounded window centered on a branded
+  backdrop, while mobile stays a full-width column.
+- (Free) **Projects manager redesign.** A list view (tap a row to edit; the active
+  project carries a green dot and an accent ring) plus an edit view per project.
+  You can now edit **any** project, not just the active one; its tracked types are
+  editable after creation; and rename / set-active / archive / delete all live in
+  the edit view. Title mode and category mode are segmented controls with a live
+  title-prefix preview.
 - (Free) **Offline-first fonts.** Removed the Google Fonts CDN link/preconnects
-  and tightened the CSP; the brand families fall back to the system stack with no
-  network call.
+  and tightened the CSP; Fraunces and Outfit are now **embedded in the file as
+  base64 `@font-face`** (latin subset, SIL OFL), so the app renders in its own
+  type with zero network calls.
 - (Free) Trimmed the seeded model fallback lists to verified-real names; the live
   fetch remains the source of truth.
+- (Docs/UI) Em dashes replaced with hyphens throughout the app's copy.
 
 ### Fixed
 - (Free) Copy-settings toast no longer claims the key/secret are included when
   encryption is locked (they are blank then) - it now says to unlock first.
+- (Free) Checkbox labels inside form fields no longer render in ALL CAPS (the
+  uppercase field-label rule was leaking onto them).
 
 ## [1.0.0] - 2026-06-29
 
