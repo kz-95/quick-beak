@@ -39,9 +39,10 @@ QuickBeak organises work into **Projects**. Each project has one or more
 - **Suggestion** — feature ideas, improvements, "wouldn't it be nice"
 - **Feedback** — user reactions, comments, sentiment
 
-The project type drives the whole experience. Most importantly, **every
-Magic Tidy action adapts its AI instructions to the project type** — tidying
-a Feedback item reads and rewrites differently than tidying a Bug.
+The type drives the whole experience. Most importantly, **Magic Tidy adapts its
+AI instructions to the item's type** - a Bug is tidied by a bug-report tidier, a
+Suggestion by a product-suggestion tidier, and Feedback by a user-feedback tidier
+that keeps your sentiment instead of rewriting it into a defect.
 
 ---
 
@@ -95,9 +96,11 @@ Everything in the free version, plus:
 All five send context based on the project type (Bug / Suggestion /
 Feedback) so the AI responds appropriately.
 
-**Provider presets.** Pro ships with one-tap presets for OpenAI-compatible,
-Gemini, and local Ollama endpoints — plus **Odysseus** (PewDiePie's
-self-hosted AI workspace). A few verified facts shape how this works:
+**Provider presets.** QuickBeak ships one-tap provider presets in **every tier
+(Free included)** for OpenAI-compatible, Gemini, and local Ollama endpoints -
+plus **Odysseus** (PewDiePie's self-hosted AI workspace). The Pro differentiator
+in this section is the five Magic Tidy actions above, not the presets. A few
+verified facts shape how the Odysseus preset works:
 
 - Odysseus is an OpenAI-compatible *client*, not a standard OpenAI *server*.
   It does **not** expose `/v1/chat/completions`. Its own chat surface is
@@ -130,15 +133,16 @@ Priority and all priority pills, filters, and sorting use the four tiers.
 - Fonts: **Fraunces** (serif headings) + **Outfit** (sans body/UI)
 - Light theme: paper `#eef4ec`, card `#ffffff`, ink `#1c2620`, ink-soft
   `#5d6b60`, accent `#2f8f57`, accent-soft `#dcefe1`, line `#d8e4d8`
-- Priority: Critical (new, deeper red e.g. `#b3261e`), High `#d8421f`,
-  Medium `#e0902a`, Low `#86988a`
-- Status: open `#e2562a`, in-progress `#e0902a`, done `#4a9d6a`
+- Priority (bright ramp, shipped 1.0.1 - critical must read hotter than high):
+  Critical `#ff0000`, High `#ff7a45`, Medium `#f2d24a`, Low `#75927c`
+- Status (each one distinct): open `#ef5a2a` (reddish orange),
+  in-progress `#eab308` (yellow), done `#4a9d6a` (green)
 - Radius `14px`, shadow `0 6px 20px rgba(30,60,40,0.12)`
 - Dark theme: inverted (deep green-charcoal bg, brightened accent) — the
-  evolution; keep the warm, organic feel. *(Full design system + per-screen
-  prompts live in `STITCH-BRIEF.md`.)*
+  evolution; keep the warm, organic feel. *(The app's own CSS in `QuickBeak.html`
+  is the design source of truth; the old STITCH-BRIEF was archived 2026-06-29.)*
 
-### 3b. Brand splash / intro (Free, v1.0.0)
+### 3b. Brand splash / intro (Free - shipped in v1.0.1)
 
 - A branded intro that plays **on first launch** — a brand-selling moment that
   makes QuickBeak feel like a real product.

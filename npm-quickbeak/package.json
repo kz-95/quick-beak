@@ -1,9 +1,16 @@
 {
   "name": "quickbeak",
-  "version": "0.0.1",
-  "description": "QuickBeak - single-file, offline-first, privacy-first issue tracker for indie developers. Name reserved; app in development.",
+  "version": "0.1.1",
+  "description": "QuickBeak - single-file, offline-first, privacy-first issue tracker for indie developers.",
   "license": "UNLICENSED",
   "private": false,
+  "bin": {
+    "quickbeak": "cli.js"
+  },
+  "files": [
+    "cli.js",
+    "README.md"
+  ],
   "keywords": [
     "issue-tracker",
     "bug-tracker",
@@ -12,8 +19,8 @@
     "indie",
     "local-first"
   ],
-  "author": "",
-  "homepage": "https://github.com/kz-95/quick-beak",
+  "author": "kz-95",
+  "homepage": "https://www.quickbeak.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kz-95/quick-beak.git"
