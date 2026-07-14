@@ -22,7 +22,13 @@ Entry format (from VERSIONING.md) — group by `Added` / `Changed` / `Fixed` /
 
 _Nothing yet - the next release will appear here. Track granular tasks in `TODO.md`._
 
-## [1.0.1] - 2026-06-30
+## [1.0.1] - NOT PUBLISHED (rolls into 1.0.2)
+
+Maker decision 2026-07-15: **1.0.1 is never released on its own.** It is merged to
+`main` and stays there, but gets no git tag, no release notes and no npm bump. The
+next public release is **1.0.2**, which ships this section's changes together with
+its own. Keep the entry here so the history stays honest; move it under the 1.0.2
+heading when that release is cut.
 
 Free patch: model picker, design-system pass, and logged fixes. No new data
 migration - `FORMAT_VERSION` stays `2` and existing data loads unchanged.
